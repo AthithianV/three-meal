@@ -11,7 +11,7 @@ const RecipesList = () => {
   const dispatch = useDispatch<AppDispatch>();
 
     useEffect(() => {
-        // dispatch(getRecipes({ keyword, filter, page }));
+        dispatch(getRecipes({ keyword, filter, page }));
     }, [keyword, filter, page]);
 
   return (
