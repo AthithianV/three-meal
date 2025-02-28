@@ -33,7 +33,7 @@ export const getRecipes = createAsyncThunk("recipes/get", async ({keyword, filte
     const API_URL = import.meta.env.VITE_API_URL;
     try {
         const res = await axios.get(
-        `${API_URL}&q=${keyword?keyword:"eggs"}&${filter?"mealType":""}${filter?filter:""}&from=${(page-1)*20}&to${page*20}`,
+        `${API_URL}&q=${keyword?keyword:"eggs"}&${filter?"mealType=":""}${filter?filter:""}&from=${(page-1)*20}&to${page*20}`,
         {
             headers: {
                 "Edamam-Account-User": "b15f5789",
