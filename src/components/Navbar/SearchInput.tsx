@@ -20,7 +20,7 @@ const SearchInput = () => {
 
   return (
     <input 
-      className="search-bar max-lg:w-[250px] max-md:w-[150px] p-2 px-5 max-md:px-2 max-md:py-1 border" 
+      className="search-bar max-lg:w-[250px] max-md:w-[180px] p-2 px-5 max-md:px-2 max-md:py-1 border" 
       type="text" 
       placeholder="Search by Keywords and Ingredients"
       onChange={(e)=>setKeyword(e.target.value)}

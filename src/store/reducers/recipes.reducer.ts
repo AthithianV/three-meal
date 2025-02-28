@@ -22,7 +22,7 @@ const initialState:InitialState = {
     loader: false,
     favourites: [],
     keyword: "eggs",
-    filter: "lunch",
+    filter: null,
     page: 1,
     more: true
 };
@@ -31,10 +31,9 @@ type GetRecipeFilter = {keyword:string, filter:string|null, page:number}
 
 export const getRecipes = createAsyncThunk("recipes/get", async ({keyword, filter, page}:GetRecipeFilter)=>{
     const API_URL = import.meta.env.VITE_API_URL;
-    return;
     try {
         const res = await axios.get(
-        `${API_URL}&q=${keyword?keyword:"eggs"}&mealType=${filter?filter:""}&from=${(page-1)*10}&to${page*10}`,
+        `${API_URL}&q=${keyword?keyword:"eggs"}&${filter?"mealType":""}${filter?filter:""}&from=${(page-1)*10}&to${page*10}`,
         {
             headers: {
                 "Edamam-Account-User": "b15f5789",
@@ -68,6 +67,9 @@ const recipeSlice = createSlice({
                 return;
             }            
             state.filter = action.payload;
+        },
+        setPage: (state, action)=>{
+            state.page = action.payload;
         }
     },
     extraReducers: (builder)=>{
