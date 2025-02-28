@@ -33,7 +33,7 @@ export const getRecipes = createAsyncThunk("recipes/get", async ({keyword, filte
     const API_URL = import.meta.env.VITE_API_URL;
     try {
         const res = await axios.get(
-        `${API_URL}&q=${keyword?keyword:"eggs"}&${filter?"mealType":""}${filter?filter:""}&from=${(page-1)*10}&to${page*10}`,
+        `${API_URL}&q=${keyword?keyword:"eggs"}&${filter?"mealType":""}${filter?filter:""}&from=${(page-1)*20}&to${page*20}`,
         {
             headers: {
                 "Edamam-Account-User": "b15f5789",
@@ -41,7 +41,11 @@ export const getRecipes = createAsyncThunk("recipes/get", async ({keyword, filte
                 "Accept-Language": "en"
             }
         })   
-        return {recipes: res.data.hits, more: res.data.more};
+        const recipes:any[] = res.data.hits.map(({recipe}: {recipe: any})=>{
+            return {...recipe, id: recipe.uri.split("#")[1]};
+        });
+        
+        return {recipes, more: res.data.more};
     } catch (error) {
         console.log(error);
         throw error;
@@ -70,6 +74,10 @@ const recipeSlice = createSlice({
         },
         setPage: (state, action)=>{
             state.page = action.payload;
+        },
+        setSelectedRecipe: (state, action)=>{
+            const found = state.recipes.find(recipe=>recipe.id===action.payload);
+            state.selectedRecipe = {...found};
         }
     },
     extraReducers: (builder)=>{

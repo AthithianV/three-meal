@@ -1,6 +1,6 @@
 import capitalize from "../../utils/textFormatter"
 
-const Cuisine = ({title}:{title:string}) => {
+const Label = ({title}:{title:string}) => {
   return (
     <div>
         <span className="text-xs border w-fit py-1 text-violet-500 font-semibold px-3 rounded-full">
@@ -10,4 +10,4 @@ const Cuisine = ({title}:{title:string}) => {
   )
 }
 
-export default Cuisine
+export default Label;

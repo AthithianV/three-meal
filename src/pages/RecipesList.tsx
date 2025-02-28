@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { recipesSelector } from "../store/reducers/recipes.reducer";
+import { getRecipes, recipesSelector } from "../store/reducers/recipes.reducer";
 import { AppDispatch } from "../store/store";
 import { useEffect } from "react";
 import Loader from "../components/Loader/Loader";
@@ -15,7 +15,7 @@ const RecipesList = () => {
     }, [keyword, filter, page]);
 
   return (
-    <div className="mt-[var(--navbar-height)] pt-5">
+    <div className="pt-5">
         {
             loader
             ?<Loader/>

@@ -1,8 +1,19 @@
 import { Bounce, ToastContainer } from 'react-toastify'
 import Navbar from '../Navbar/Navbar'
-import { Outlet } from 'react-router-dom'
+import { Outlet, useLocation, useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 
 const MainLayout = () => {
+
+  const navigate = useNavigate();
+  const path = useLocation();
+
+  useEffect(()=>{
+    if(path.pathname==="/"){
+      navigate("/recipes");
+    }
+  },[]);
+
   return (
     <div className="bg-stone-50">
         <ToastContainer
@@ -19,7 +30,9 @@ const MainLayout = () => {
           transition={Bounce}
         />
         <Navbar/>
-        <Outlet/>
+        <div>
+          <Outlet/>
+        </div>
     </div>
   )
 }
