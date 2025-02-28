@@ -1,3 +1,26 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root{
+    --navbar-height: 8vh;
+    --boby-height: 92vh;
+}
+
+@layer{
+    .flex-center{
+        @apply flex justify-center items-center
+    }
+
+    .recipe-item{
+        @apply col-span-3 max-xl:col-span-3 max-lg:col-span-4 max-md:col-span-6 max-sm:col-span-12 h-fit p-4 px-8 bg-white hover:bg-slate-100 rounded-3xl border overflow-hidden cursor-pointer
+    }
+
+    .recipes {
+        @apply grid grid-cols-12 gap-4 justify-items-center w-full
+    }
+
+    .search-bar{
+        @apply py-2 px-8 w-[500px] max-lg:w-[400px] max-md:w-[300px] max-sm:w-[200px] rounded-full
+    }
+}
