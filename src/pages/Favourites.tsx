@@ -26,6 +26,7 @@ const Favourites = () => {
               {
              favourites.map((recipe, index)=>(
                     <RecipesItem
+                      dietLabels={recipe.dietLabels}
                       key={index} 
                       imageUrl={recipe.image}
                       id={recipe.id}

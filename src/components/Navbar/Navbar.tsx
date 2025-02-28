@@ -1,7 +1,7 @@
 import FavouritesButton from "./FavouritesButton";
-import Filters from "./Filters";
 import SearchInput from "./SearchInput";
-import logo from "../../../public/breakfast.png"
+import logo from "../../assets/breakfast.png"
+import Filters from "./Filters";
 
 
 const Navbar = () => {
@@ -13,8 +13,9 @@ const Navbar = () => {
         </div>
 
         <div className="flex-center gap-4 max-md:gap-2">
-          <div className="max-md:hidden">
-            <Filters/>
+          <div className="max-md:hidden flex gap-2">
+            <Filters name={"Meal Type"}/>
+            <Filters name={"Diet Type"}/>
           </div>
           <SearchInput/>
           <FavouritesButton/>

@@ -7,12 +7,12 @@ import Recipes from "../components/Recipes/Recipes";
 
 const RecipesList = () => {
 
-  const {loader, filter, keyword, page} = useSelector(recipesSelector);
+  const {loader, mealTypeFilter, dietTypeFilter, keyword, page} = useSelector(recipesSelector);
   const dispatch = useDispatch<AppDispatch>();
 
     useEffect(() => {
-        dispatch(getRecipes({ keyword, filter, page }));
-    }, [keyword, filter, page]);
+        dispatch(getRecipes({ keyword, mealTypeFilter, dietTypeFilter, page }));
+    }, [keyword, mealTypeFilter, dietTypeFilter, page]);
 
   return (
     <div className="pt-5">
