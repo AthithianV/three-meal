@@ -3,8 +3,8 @@
 @tailwind utilities;
 
 :root{
-    --navbar-height: 8vh;
-    --boby-height: 92vh;
+    --navbar-height: 10vh;
+    --body-height: 90vh;
 }
 
 @layer{
@@ -21,6 +21,6 @@
     }
 
     .search-bar{
-        @apply py-2 px-8 w-[500px] max-lg:w-[400px] max-md:w-[300px] max-sm:w-[200px] rounded-full
+        @apply w-[500px] max-lg:w-[400px] max-md:w-[300px] max-sm:w-[200px] rounded-full
     }
 }

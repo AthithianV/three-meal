@@ -1,54 +1,39 @@
-# React + TypeScript + Vite
+# Three Meals
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+1. Uses edamam Api for getting Recipes.
+2. User can search recipes based on name, ingredient and specific Criteria.
+3. When Recipe is Selected then Ingredients, instructions are displayed of selected Recipe is displayed.
+4. User can mark recipe to favorites.
+5. Filter Option for Breakfast, Lunch or Dinner.
+6. Used Reactjs and Redux with appropriate actions, reducers and the store.
 
-Currently, two official plugins are available:
+# Libraries Used:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+1. ReactJs
+2. Redux Toolkit
+3. React Spinner
+4. Fontawesome
 
-## Expanding the ESLint configuration
+# Sets to Start:
+1. Clone the Project.
+  ```bash
+  git clone https://github.com/AthithianV/three-meal.git
+  ```
+2. Move the Project Directory
+  ```bash
+  cd three-meal
+  ```
+3. Install Packages
+  ```bash
+    npm install
+  ```
+4. Build the project
+  ```bash
+    npm run build
+  ```
+5. Start the application
+  ```bash
+    npm run preview
+  ```
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+[Assesment Link](https://workdrive.zohopublic.in/external/7a382e4544c89e8bfd1e2996e38f2d50520e488a136597db7bff02764b84e5bf?layout=list)

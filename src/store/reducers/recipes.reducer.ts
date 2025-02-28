@@ -10,7 +10,8 @@ type InitialState = {
     selectedRecipe: null|any,
     loader: boolean,
     favourites: any[],
-    keyword: string
+    keyword: string,
+    filter: string|null
 }
 
 const initialState:InitialState = {
@@ -18,14 +19,16 @@ const initialState:InitialState = {
     selectedRecipe: null,
     loader: false,
     favourites: [],
-    keyword: ""
+    keyword: "eggs",
+    filter: "lunch"
 };
 
-export const getRecipes = createAsyncThunk("recipes/get", async ()=>{
+export const getRecipes = createAsyncThunk("recipes/get", async ({keyword, filter}:{keyword:string, filter:string|null})=>{
     const API_URL = import.meta.env.VITE_API_URL;
+    return;
     try {
         const res = await axios.get(
-        `${API_URL}&q=eggs&from=1&to5`, 
+        `${API_URL}&q=${keyword?keyword:"eggs"}&mealType=${filter?filter:""}&from=1&to12`,
         {
             headers: {
                 "Edamam-Account-User": "b15f5789",
@@ -33,8 +36,6 @@ export const getRecipes = createAsyncThunk("recipes/get", async ()=>{
                 "Accept-Language": "en"
             }
         })   
-        console.log(res.data.hits);
-        
         return res.data.hits;
     } catch (error) {
         console.log(error);
@@ -54,6 +55,11 @@ const recipeSlice = createSlice({
         },
         setKeyword: (state,action)=>{
             state.keyword = action.payload;
+        },
+        setFilter: (state, action)=>{
+            console.log(action.payload);
+            
+            state.filter = action.payload;
         }
     },
     extraReducers: (builder)=>{
@@ -63,9 +69,11 @@ const recipeSlice = createSlice({
             })
             .addCase(getRecipes.fulfilled, (state, action)=>{
                 state.recipes = action.payload;
+                state.loader = false
             })
-            .addCase(getRecipes.rejected, ()=>{
+            .addCase(getRecipes.rejected, (state)=>{
                 toast.error("Something Went Wrong!");
+                state.loader= false
             })
     }
 });

@@ -1,8 +1,20 @@
 import { Bounce, ToastContainer } from "react-toastify"
 import Navbar from "./components/Navbar/Navbar"
 import Recipes from "./components/Recipes/Recipes"
+import { useDispatch, useSelector } from "react-redux"
+import { getRecipes, recipesSelector } from "./store/reducers/recipes.reducer"
+import Loader from "./components/Loader/Loader"
+import { AppDispatch } from "./store/store"
+import { useEffect } from "react"
 
 function App() {
+
+  const {loader, filter, keyword} = useSelector(recipesSelector);
+  const dispatch = useDispatch<AppDispatch>();
+
+    useEffect(() => {
+        // dispatch(getRecipes({ keyword, filter }));
+    }, [keyword, filter]);
 
   return (
     <div className="bg-stone-50">
@@ -20,7 +32,11 @@ function App() {
         transition={Bounce}
       />
       <Navbar/>
-      <Recipes/>
+      {
+        loader
+        ?<Loader/>
+        :<Recipes/>
+      }
     </div>
   )
 }
