@@ -12,6 +12,8 @@ type InitialState = {
     favourites: any[],
     keyword: string,
     filter: string|null
+    page: number,
+    more: boolean
 }
 
 const initialState:InitialState = {
@@ -20,15 +22,19 @@ const initialState:InitialState = {
     loader: false,
     favourites: [],
     keyword: "eggs",
-    filter: "lunch"
+    filter: "lunch",
+    page: 1,
+    more: true
 };
 
-export const getRecipes = createAsyncThunk("recipes/get", async ({keyword, filter}:{keyword:string, filter:string|null})=>{
+type GetRecipeFilter = {keyword:string, filter:string|null, page:number}
+
+export const getRecipes = createAsyncThunk("recipes/get", async ({keyword, filter, page}:GetRecipeFilter)=>{
     const API_URL = import.meta.env.VITE_API_URL;
     return;
     try {
         const res = await axios.get(
-        `${API_URL}&q=${keyword?keyword:"eggs"}&mealType=${filter?filter:""}&from=1&to12`,
+        `${API_URL}&q=${keyword?keyword:"eggs"}&mealType=${filter?filter:""}&from=${(page-1)*10}&to${page*10}`,
         {
             headers: {
                 "Edamam-Account-User": "b15f5789",
@@ -36,7 +42,7 @@ export const getRecipes = createAsyncThunk("recipes/get", async ({keyword, filte
                 "Accept-Language": "en"
             }
         })   
-        return res.data.hits;
+        return {recipes: res.data.hits, more: res.data.more};
     } catch (error) {
         console.log(error);
         throw error;
@@ -57,8 +63,10 @@ const recipeSlice = createSlice({
             state.keyword = action.payload;
         },
         setFilter: (state, action)=>{
-            console.log(action.payload);
-            
+            if(action.payload==="Any"){
+                state.filter = null;
+                return;
+            }            
             state.filter = action.payload;
         }
     },
@@ -68,12 +76,14 @@ const recipeSlice = createSlice({
                 state.loader = true;
             })
             .addCase(getRecipes.fulfilled, (state, action)=>{
-                state.recipes = action.payload;
+                state.recipes = action.payload?.recipes;
+                state.more = action.payload?.more;
                 state.loader = false
             })
             .addCase(getRecipes.rejected, (state)=>{
                 toast.error("Something Went Wrong!");
-                state.loader= false
+                state.more = false;
+                state.loader= false;
             })
     }
 });
