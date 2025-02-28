@@ -1,17 +1,20 @@
 import { useDispatch } from "react-redux"
 import { recipesActions } from "../../store/reducers/recipes.reducer";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const SearchInput = () => {
 
   const dispatch = useDispatch();
   const [keyword, setKeyword] = useState("");
+  const navigate = useNavigate();
 
   // SetKeyword is call only after delay of 500, reducing load on server
   useEffect(() => {
     const timeout = setTimeout(() => {
       if (keyword) {
         dispatch(recipesActions.setKeyword(keyword));
+        navigate("/recipes");
       }
     }, 1000);
 

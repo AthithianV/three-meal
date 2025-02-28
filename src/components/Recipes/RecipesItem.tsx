@@ -22,7 +22,7 @@ const RecipesItem = ({imageUrl, id, mealType, cuisine, calories, label}:PropType
             <Picture url={imageUrl} calories={calories}/>
 
             <h4 className="my-2 font-semibold text-md">{label}</h4>
-            <RecipeFooter cuisine={cuisine}/>
+            <RecipeFooter cuisine={cuisine} id={id}/>
         </Link>
     </li>
   )

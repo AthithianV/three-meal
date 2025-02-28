@@ -59,8 +59,15 @@ const recipeSlice = createSlice({
         pickRecipe: (state, action)=>{
             state.selectedRecipe = action.payload;
         },
-        addToFavourites: (state, action)=>{
-            state.favourites.unshift(action.payload);
+        toggleFavourites: (state, action)=>{
+            const id = action.payload;
+            const favouriteExists = state.favourites.find(recipe=>recipe.id===id)
+            if(favouriteExists){
+                state.favourites = [...state.favourites.filter(recipe=>recipe.id!==id)];
+            }else{
+                const found = state.recipes.find(recipe=>recipe.id === action.payload);
+                state.favourites.unshift(found);
+            }
         },
         setKeyword: (state,action)=>{
             state.keyword = action.payload;
