@@ -8,7 +8,9 @@ const Picture = ({url, calories}:{url:string, calories:number}) => {
             <FontAwesomeIcon icon={faFire} className="text-red-500"/>
             <span>{Math.floor(calories)}</span>
         </div>
-        <img src={url} alt={"recipe-image"} className="w-[100%] rounded-xl"/>
+        <div className="min-h-[150px] bg-gray-200">
+          <img src={url} alt={"recipe-image"} className="w-[100%] rounded-xl"/>
+        </div>
     </div>
   )
 }
