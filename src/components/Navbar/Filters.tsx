@@ -17,6 +17,7 @@ const mealTypeFilters = [
 ];
 
 const dietTypeFilters = [
+  {title: "Any", type: "Any"},
   {title: "balanced", type: "balanced"},
   {title: "high-protein", type: "high-protein"},
   {title: "low-fat", type: "low-fat"},
@@ -47,17 +48,18 @@ const Filters = ({name}:{name:string}) => {
     }, []);
 
     // setting filter to the state
-    const setFilter = (type:string)=>{
+    const setFilter = (e:React.MouseEvent<HTMLLIElement, MouseEvent>, type:string)=>{
+      e.stopPropagation();
+      setDropdown(prev=>!prev)
       dispatch(recipesActions.setFilter({type,name}));
-      setDropdown(false);
       navigate("/recipes");      
     }
 
     const getBGClass = (type: string) => {
       if (name === "Meal Type") {
-        return type === mealTypeFilter ? "bg-gray-200" : "hover:bg-gray-100";
+        return (type === mealTypeFilter || (!mealTypeFilter && type==="Any")) ? "bg-gray-200" : "hover:bg-gray-100";
       } else {
-        return type === dietTypeFilter ? "bg-gray-200" : "hover:bg-gray-100";
+        return (type === dietTypeFilter || (!dietTypeFilter && type==="Any")) ? "bg-gray-200" : "hover:bg-gray-100";
       }
     };
 
@@ -65,7 +67,7 @@ const Filters = ({name}:{name:string}) => {
     <div>
       <div 
       ref={dropdownRef}
-      className={`py-2 px-4 rounded relative flex-center gap-2 cursor-pointer ${dropdown?"bg-gray-100 border":"bg-gray-50 border"}`} 
+      className={`py-2 px-4 rounded relative flex-center gap-2 cursor-pointer border-x hover:bg-gray-100`} 
       onClick={()=>setDropdown(prev=>!prev)}>
         <span>{capitalize(name.toLowerCase())}</span>
         <FontAwesomeIcon icon={dropdown?faAngleUp:faAngleDown}/>
@@ -78,7 +80,7 @@ const Filters = ({name}:{name:string}) => {
                 <li 
                     key={index}
                     className={`py-2 px-4 max-md:px-2 w-full max-md:py-1 rounded cursor-pointer border-b ${getBGClass(item.type)}`}
-                    onClick={()=>setFilter(item.type)}>
+                    onClick={(e)=>setFilter(e, item.type)}>
                         {item.title}
                 </li>
             ))

@@ -86,19 +86,18 @@ const recipeSlice = createSlice({
         },
         setFilter: (state, action)=>{
             if(action.payload.name === "Meal Type"){
-                if(action.payload==="Any"){
+                if(action.payload.type==="Any"){
                     state.mealTypeFilter = null;
                 }else{
                     state.mealTypeFilter = action.payload.type;
                 }
             }else{
-                if(action.payload==="Any"){
+                if(action.payload.type==="Any"){
                     state.dietTypeFilter = null;
                 }else{
                     state.dietTypeFilter = action.payload.type;
                 }
             }
-                      
         },
         setPage: (state, action)=>{
             state.page = action.payload;

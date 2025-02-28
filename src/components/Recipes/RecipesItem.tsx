@@ -21,7 +21,7 @@ const RecipesItem = ({imageUrl, id, mealType, cuisine, calories, label, dietLabe
         <Link to={`${id}`}>
             <h3 className="my-2 font-semibold text-violet-700">{capitalize(mealType)}</h3>
 
-            <div className="flex gap-2 my-2">
+            <div className="flex gap-2 my-2 flex-wrap">
               {
                 dietLabels.map((item, index)=><Label title={item} key={index}/>)
               }
