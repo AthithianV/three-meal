@@ -23,7 +23,7 @@ const Nutrients = ({nutrients}:{nutrients:any}) => {
                         <tr>
                         {
                             tableData[data].map((item, index)=>(
-                                nutrients[item] && <th className="p-2 text-center font-semibold text-violet-600 border">{nutrients[item].label}</th>
+                                nutrients[item] && <th key={index} className="p-2 text-center font-semibold text-violet-600 border">{nutrients[item].label}</th>
                             ))
                         }
                         </tr>
@@ -32,7 +32,7 @@ const Nutrients = ({nutrients}:{nutrients:any}) => {
                         <tr>
                         {
                             tableData[data].map((item, index)=>(
-                                nutrients[item] && <td className="p-2 text-center border-x border-b">{Math.round(nutrients[item].quantity)}{nutrients[item].unit}</td>
+                                nutrients[item] && <td key={index} className="p-2 text-center border-x border-b">{Math.round(nutrients[item].quantity)}{nutrients[item].unit}</td>
                             ))
                         }    
                         </tr>
